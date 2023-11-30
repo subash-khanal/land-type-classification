@@ -7,20 +7,20 @@ import torch.nn as nn
 from .utilities.landtype_text_prompts import get_class_prompts
 from .utilities import clap_data_processor
 from .lc_dataloader import lc_dataset
+import torch
 
 class ZS_Evaluation(pl.LightningModule):
-    def __init__(self,hparams)
+    def __init__(self,hparams):
+        super().__init__()
+        self.ckpt_path = self.hparams.geoclap_ckpt_path
+        self.dataset_type = self.hparams.dataset_type
+        self.sat_type = self.hparams.sat_type
+        self.geoclap_model, self.orig_hparams = self.get_geoclap()
 
-    super().__init__()
-    self.ckpt_path = self.hparams.geoclap_ckpt_path
-    self.dataset_type = self.hparams.dataset_type
-    self.sat_type = self.hparams.sat_type
-    self.geoclap_model, self.orig_hparams = self.get_geoclap()
-
-    self.sat_encoder = self.geoclap_model.sat_encoder.eval()
-    self.text_encoder = self.geoclap_model.text_encoder.eval()
-    self.class_prompts = self.get_class_prompts(data_type=self.hparams.dataset_type)
-    self.text_embeds = self.get_text_embeddings()
+        self.sat_encoder = self.geoclap_model.sat_encoder.eval()
+        self.text_encoder = self.geoclap_model.text_encoder.eval()
+        self.class_prompts = self.get_class_prompts(data_type=self.hparams.dataset_type)
+        self.text_embeds = self.get_text_embeddings()
 
     def get_geoclap(self):
         #load geoclap model from checkpoint
