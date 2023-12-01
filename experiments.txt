@@ -1,7 +1,13 @@
 #These are the experiments we conducted for the project: Options: ["NWPU_RESISC45", "RSSCN7", "UCMerced_LandUse"]
 
-1. python -m land-type-classification.train --dataset_type NWPU_RESISC45 --wandb_mode online --mode train --max_epochs 30 --run_name NWPU_RESISC45
+1. python -m land-type-classification.train --dataset_type NWPU_RESISC45 --wandb_mode online --mode train --run_name NWPU_RESISC45_SoundingEarth --sat_type SoundingEarth
 
-2. python -m land-type-classification.train --dataset_type RSSCN7 --wandb_mode online --mode train --max_epochs 30 --run_name RSSCN7
+2. python -m land-type-classification.train --dataset_type NWPU_RESISC45 --wandb_mode online --mode train --run_name NWPU_RESISC45_sentinel --sat_type sentinel
 
-3. python -m land-type-classification.train --dataset_type UCMerced_LandUse --wandb_mode online --mode train --max_epochs 30 --run_name UCMerced_LandUse
+3. python -m land-type-classification.train --dataset_type RSSCN7 --wandb_mode online --mode train  --run_name RSSCN7_SoundingEarth --sat_type SoundingEarth
+
+4. python -m land-type-classification.train --dataset_type RSSCN7 --wandb_mode online --mode train  --run_name RSSCN7_sentinel --sat_type sentinel
+
+5. python -m land-type-classification.train --dataset_type UCMerced_LandUse --wandb_mode online --mode train --run_name UCMerced_LandUse_SoundingEarth --sat_type SoundingEarth
+
+6. python -m land-type-classification.train --dataset_type UCMerced_LandUse --wandb_mode online --mode train --run_name UCMerced_LandUse_sentinel --sat_type sentinel

@@ -190,7 +190,7 @@ if __name__ == '__main__':
     parser.add_argument('--train_batch_size', type=int, default=256)
     parser.add_argument('--val_batch_size', type=int, default=256)
     parser.add_argument('--test_batch_size', type=int, default=256)
-    parser.add_argument('--max_epochs', type=int, default=10)
+    parser.add_argument('--max_epochs', type=int, default=50)
     parser.add_argument('--mode', type=str, default='dev')                          #Options: dev, train
     parser.add_argument('--sat_type', type=str, default='SoundingEarth')            #Options: [SoundingEarth, sentinel]
     parser.add_argument('--learning_rate', type=float, default=0.1)
@@ -217,7 +217,7 @@ if __name__ == '__main__':
     lr_logger = LearningRateMonitor(logging_interval='step')
     wb_logger = WandbLogger(save_dir=cfg.log_dir,project=args.project_name, name=args.run_name, mode=args.wandb_mode)
     ckpt_monitors = ((
-            ModelCheckpoint(monitor='val_acc', mode='max', filename='{epoch}-{step}-{val_loss:.3f}', save_top_k = -1, every_n_epochs = 1,save_last=True,save_on_train_epoch_end=True)
+            ModelCheckpoint(monitor='val_acc', mode='max', filename='{epoch}-{step}-{val_acc:.3f}', save_top_k = 10, every_n_epochs = 1,save_last=True,save_on_train_epoch_end=True)
         ))
 
     if args.mode == 'dev': 
