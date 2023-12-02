@@ -7,11 +7,7 @@ import os
 from argparse import ArgumentParser
 
 
-if __name__ == '__main__':
-    parser = ArgumentParser(description='')
-    parser.add_argument('--results_path', type=str, default='/home/k.subash/land-type-classification/logs/NWPU_RESISC45_using_SoundingEarth_trained_ckpt.csv')  
-    args = parser.parse_args()
-    results_path = args.results_path
+def save_confusion_matrix(results_path):
     df = pd.read_csv(results_path)
     # Convert class labels to integers using label encoding
     label_encoder = LabelEncoder()
@@ -37,8 +33,17 @@ if __name__ == '__main__':
 
     # Save the plot with a specific name (replace 'confusion_matrix_plot.png' with your desired file name)
     outdir = "/".join(results_path.split("/")[:-1])
-    outname = results_path.split("/")[-1].replace("_ckpt.csv","_confusion_matrix.png")
+    outname = results_path.split("/")[-1].replace(".csv","_confusion_matrix.png")
     outfile = os.path.join(outdir,outname)
+    # exec(os.environ.get("DEBUG"))
     plt.savefig(outfile)
     # Show the plot
     plt.show()
+
+
+if __name__ == '__main__':
+    parser = ArgumentParser(description='')
+    parser.add_argument('--results_path', type=str, default='/home/k.subash/land-type-classification/logs/NWPU_RESISC45_using_SoundingEarth_trained_ckpt.csv')  
+    args = parser.parse_args()
+    results_path = args.results_path
+    save_confusion_matrix(results_path)
