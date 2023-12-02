@@ -107,7 +107,7 @@ class Evaluate(object):
         gts = torch.cat(gts)
         test_acc = self.accuracy(preds.to(self.device), gts.to(self.device))
         df = pd.DataFrame(columns=['ground_truth','prediction'])
-        preds = [self.inv_class_map[torch.argmax(preds[i]).detach().cpu().item()] for i in range(len(preds))]
+        preds = [self.inv_class_map[preds[i].detach().cpu().item()] for i in range(len(preds))]
         gts = [self.inv_class_map[gts[i].detach().cpu().item()] for i in range(len(gts))]
         df['ground_truth'] = gts
         df['prediction'] = preds
