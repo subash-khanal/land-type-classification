@@ -23,10 +23,13 @@ def save_confusion_matrix(results_path):
 
     # Get class labels
     class_labels = label_encoder.classes_
-
+    sns.set(font_scale=4.5)
     # Plot confusion matrix with class labels
-    plt.figure(figsize=(16, 16))
-    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=class_labels, yticklabels=class_labels)
+    plt.figure(figsize=(40, 40))
+    g = sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=class_labels, yticklabels=class_labels)
+    # g.set_xticklabels(g.get_xticklabels(), rotation = 20)
+    # g.set_yticklabels(g.get_yticklabels(), rotation = 0)
+    plt.tight_layout()
     plt.title('Confusion Matrix')
     plt.xlabel('Predicted Label')
     plt.ylabel('True Label')
